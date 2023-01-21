@@ -7,11 +7,11 @@ import RenderButton from "./childcomponents/RenderButton";
 
 
 export default function Login(){
-    const [user,setUser] =useState({
+    const [userContext,setUserContext] =useState({
         email: "", 
         password: "",
     });
-    const {email, password} = user;
+    const {email, password} = userContext;
     const [desabilitado,setDesabilitado]=useState(false);
     const [next,setNext] = useState(false);
 
@@ -45,7 +45,7 @@ export default function Login(){
                     required
                     value={email}
                     type="email"
-                    onChange={(e)=>setUser({...user,email:e.target.value})}
+                    onChange={(e)=>setUserContext({...userContext,email:e.target.value})}
                     disabled={desabilitado}
                 />
                 <Input
@@ -53,7 +53,7 @@ export default function Login(){
                     required
                     value={password}
                     type="password"
-                    onChange={(e)=>setUser({...user,password: e.target.value})}
+                    onChange={(e)=>setUserContext({...userContext,password: e.target.value})}
                     disabled={desabilitado}
                 />
                 <button 
