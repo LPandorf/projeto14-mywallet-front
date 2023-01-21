@@ -3,6 +3,7 @@ import GlobalStyle from "./GlobalStyle";
 import {User} from "./UserContext";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Login from "./components/Login";
+import Cadastro from "./components/Cadastro";
 
 export default function App(){
     const [userContext, setUserContext] =useState(localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')):null);
