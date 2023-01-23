@@ -1,24 +1,26 @@
 import { useState } from "react";
 import GlobalStyle from "./GlobalStyle";
-import {User} from "./UserContext";
+import {UserContext} from "./UserContext";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Login from "./components/Login";
 import Cadastro from "./components/Cadastro";
+import Home from "./components/Home";
 
 export default function App(){
-    const [userContext, setUserContext] =useState(localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')):null);
+    const [userContext, setUserContext]=useState(localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')):null);
     
     return(
         <>
             <GlobalStyle/>
-            <User.Provider value={{userContext,setUserContext}}>
+            <UserContext.Provider value={{userContext,setUserContext}}>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<Login/>}/>
+                        <Route path="/" element={<Home/>}/>
                         <Route path="/cadastro" element={<Cadastro/>}/>
                     </Routes>
                 </BrowserRouter>
-            </User.Provider>
+            </UserContext.Provider>
         </>
     );
 }
+//Login
