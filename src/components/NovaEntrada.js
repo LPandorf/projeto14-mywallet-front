@@ -31,12 +31,18 @@ export default function NovaEntrada(){
     
     return (
         <Wrapper /* onSubmmit={OnSubmit} */>
-            <Title>Nova Entrada</Title>
+            <Title>Nova entrada</Title>
             <Input
                 placeholder="Valor"
+                type="number"
+                value={value}
+                onChange={e=>setValue(e.target.value)}
             />
             <Input
                 placeholder="Descrição"
+                type="text"
+                value={description}
+                onChange={e=>setDescription(e.target.value)}
             />
             <button onClick={OnSubmit} type="submit">
                 Salvar entrada
