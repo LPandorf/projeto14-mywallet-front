@@ -6,12 +6,19 @@ import {UserContext} from "../UserContext";
 
 export default function Home(){
     const {userContext}=useContext(UserContext);
-    const [transactions,setTransactions] = useState([]);
+    const [transactions,setTransactions] = useState([
+        {
+            createAt:'23',
+            description: 'algumacoisa',
+            value: '23.00',
+            type: 'entrada'
+        }
+    ]);
 
     useEffect(()=>{
         async function getUserTransaction(){
             try{
-                const {data}=await axios.get('',{
+                const {data}=await axios.get('http://localhost:5000/transactions',{
                     headers:{
                         Authorization: `Bearer ${userContext.token}`
                     }
@@ -25,12 +32,9 @@ export default function Home(){
         getUserTransaction();
     },[]);
 
-    function renderTransactions(){
-        return transactions.map((t,index)=>(
-            <Transações key={index} style={t.type==='entrada'? {color:'green'}:{color:'red'}}>
-                {t.createAt}|{t.description}|{t.value}
-            </Transações>
-        ));
+
+    function Console(){
+        console.log("pshfjbgkjbfgkjbf")
     }
 
     function balance(){
@@ -59,8 +63,14 @@ export default function Home(){
                     <>
                         <p style={{color:'gray', fontSize:12}}>
                             Minhas transações
-                            <p>{renderTransactions()}</p>
+                            
                         </p>
+                        {transactions.map((t,index)=>(
+                            
+                            <Transações key={index} style={t.type==='entrada'? {color:'green'}:{color:'red'}}>
+                                fsdgfg{t.createAt}|{t.description}|{t.value}{Console()}
+                            </Transações>
+                        ))}
                         <Total>SALDO: <Num>{saldo}</Num></Total>
                     </>
                 ):(
@@ -69,18 +79,22 @@ export default function Home(){
             </Page>
             <End>
                 <New>
-                    <p>icone</p>
-                    <p>Nova<br/>entrada</p>
+                    <Link to="/entrada">
+                        <p>icone</p>
+                        <p>Nova<br/>entrada</p>
+                    </Link>
                 </New>
                 <New>
-                    <p>icone</p>
-                    <p>Nova<br/>saída</p>
+                    <Link to="/saida">
+                        <p>icone</p>
+                        <p>Nova<br/>saída</p>
+                    </Link>
                 </New>
             </End>
         </Wrapper>
     );
 }
-
+/* <p>{renderTransactions()}</p> */
 const Wrapper=styled.div`
     background-color: #8C11BE;
     height: 100vh;
@@ -130,7 +144,8 @@ const New=styled.div`
 `;
 
 const Transações=styled.div`
-
+    color: black;
+    background: pink;
 `;
 
 const Page=styled.div`
@@ -168,3 +183,12 @@ const Num=styled.div`
     line-height: 20px;
     color: #03AC00;
 `;
+   /*  function renderTransactions(){
+        console.log("knkdbfjdsbjsdbflbdlbfdsb")
+        return transactions.map((t,index)=>(
+            
+            <Transações key={index} style={t.type==='entrada'? {color:'green'}:{color:'red'}}>
+                {t.createAt}|{t.description}|{t.value}{Console()}
+            </Transações>
+        )); 
+    } */

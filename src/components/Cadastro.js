@@ -25,7 +25,7 @@ export default function Cadastro(){
             alert("Confirmação de senha e senha devem ser iguais");
             return;
         }
-        const promisse=axios.post("",{
+        const promisse=axios.post("http://localhost:5000/cadastro",{
             email:email,
             name:name,
             password:password
