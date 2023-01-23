@@ -98,13 +98,18 @@ const Wrapper=styled.form`
         color: white;
         background-color: #A328D6;
         width: 326px;
-        height: 46px;
+        height: 50px;
+        padding: 10px;
         border-radius: 5px;
         font-family: 'Raleway';
         font-style: normal;
         font-weight: 700;
         font-size: 20px;
         line-height: 23px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
 

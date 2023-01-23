@@ -89,6 +89,9 @@ const Wrapper=styled.form`
         font-weight: 700;
         font-size: 20px;
         line-height: 23px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
 
