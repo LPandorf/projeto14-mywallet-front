@@ -16,8 +16,6 @@ export default function Cadastro(){
     const navigate=useNavigate();
     const [passwordConfirmation,setPasswordConfirmation]=useState([]);
 
-
-
     function OnSubmit(e){
         setDesabilitado(true);
         e.preventDefault();

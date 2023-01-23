@@ -91,7 +91,7 @@ export default function Home(){
         </Wrapper>
     );
 }
-/* <p>{renderTransactions()}</p> */
+
 const Wrapper=styled.div`
     background-color: #8C11BE;
     height: 100vh;
@@ -231,14 +231,3 @@ const Left=styled.div`
     display: flex;
     justify-content: flex-start;
 `;
-
-
-   /*  function renderTransactions(){
-        console.log("knkdbfjdsbjsdbflbdlbfdsb")
-        return transactions.map((t,index)=>(
-            
-            <Transações key={index} style={t.type==='entrada'? {color:'green'}:{color:'red'}}>
-                {t.createAt}|{t.description}|{t.value}{Console()}
-            </Transações>
-        )); 
-    } */
