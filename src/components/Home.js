@@ -6,14 +6,7 @@ import {UserContext} from "../UserContext";
 
 export default function Home(){
     const {userContext}=useContext(UserContext);
-    const [transactions,setTransactions] = useState([
-        {
-            createAt:'23',
-            description: 'algumacoisa',
-            value: '23.00',
-            type: 'entrada'
-        }
-    ]);
+    const [transactions,setTransactions] = useState([]);
 
     useEffect(()=>{
         async function getUserTransaction(){
@@ -50,46 +43,50 @@ export default function Home(){
         }
     }
 
-    const saldo=balance;
+    const saldo=balance();
 
     return(
         <Wrapper>
             <Hi>
                 Olá, {userContext.name}
-                <Link to="/">icone</Link>
+                <Link to="/"><Icon><ion-icon name="log-out-outline"></ion-icon></Icon></Link>
             </Hi>
             <Page>
                 {transactions.length>0?(
                     <>
-                        <p style={{color:'gray', fontSize:12}}>
+                        {/* <p style={{color:'gray', fontSize:12}}>
                             Minhas transações
                             
-                        </p>
+                        </p> */}
                         {transactions.map((t,index)=>(
                             
-                            <Transações key={index} style={t.type==='entrada'? {color:'green'}:{color:'red'}}>
-                                fsdgfg{t.createAt}|{t.description}|{t.value}{Console()}
+                            <Transações key={index} >
+                                <Left>
+                                    <Date>{t.createAt}  </Date>
+                                    <Desc>{t.description}</Desc>
+                                </Left>
+                                <Val style={t.type==='entrada'? {color:'green'}:{color:'red'}}>{t.value}{Console()}</Val>
                             </Transações>
                         ))}
-                        <Total>SALDO: <Num>{saldo}</Num></Total>
+                        <Total>SALDO: <Num style={saldo>=0? {color:'green'}:{color:'red'}}>{saldo}</Num></Total>
                     </>
                 ):(
                     <Nothing>Não há registros de<br/>entrada ou saída</Nothing>
                 )}
             </Page>
             <End>
-                <New>
-                    <Link to="/entrada">
-                        <p>icone</p>
+                <Link to="/entrada">
+                    <New>
+                        <Icon><ion-icon name="add-circle-outline"></ion-icon></Icon>
                         <p>Nova<br/>entrada</p>
-                    </Link>
-                </New>
-                <New>
-                    <Link to="/saida">
-                        <p>icone</p>
+                    </New>
+                </Link>
+                <Link to="/saida">
+                    <New>
+                        <Icon><ion-icon name="remove-circle-outline"></ion-icon></Icon>
                         <p>Nova<br/>saída</p>
-                    </Link>
-                </New>
+                    </New>
+                </Link>
             </End>
         </Wrapper>
     );
@@ -103,6 +100,10 @@ const Wrapper=styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+`;
+
+const Icon=styled.div`
+    font-size: 30px;
 `;
 
 const Hi=styled.div`
@@ -140,12 +141,18 @@ const New=styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
     padding: 10px;
 `;
 
 const Transações=styled.div`
     color: black;
-    background: pink;
+    width: 100%;
+    height: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
 `;
 
 const Page=styled.div`
@@ -154,9 +161,15 @@ const Page=styled.div`
     background-color: #FFFFFF;
     margin-bottom: 20px;
     border-radius: 5px;
+    padding: 20px;
+    justify-content: space-between;
 `;
 
 const Nothing=styled.div`
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
@@ -173,6 +186,9 @@ const Total=styled.div`
     font-size: 17px;
     line-height: 20px;
     color: #000000;
+    bottom: 10px;
+    display: flex;
+    justify-content: space-between;
 `;
 
 const Num=styled.div`
@@ -181,8 +197,42 @@ const Num=styled.div`
     font-weight: 400;
     font-size: 17px;
     line-height: 20px;
-    color: #03AC00;
 `;
+
+const Date=styled.div`
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #C6C6C6;
+    margin-right: 10px;
+`;
+
+const Desc=styled.div`
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+`;
+
+const Val=styled.div`
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+`;
+
+const Left=styled.div`
+    display: flex;
+    justify-content: flex-start;
+`;
+
+
    /*  function renderTransactions(){
         console.log("knkdbfjdsbjsdbflbdlbfdsb")
         return transactions.map((t,index)=>(
